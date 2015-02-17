@@ -19,9 +19,8 @@ import java.util.stream.StreamSupport;
  * 	you want to transparently convert.
  *
  */
-public class CollectConvert {
+public final class CollectConvert {
 
-	//from iterable
 	public CollectConvert() {
 		throw new UnsupportedOperationException() ;
 	}
