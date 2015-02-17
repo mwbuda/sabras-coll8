@@ -1,4 +1,4 @@
-package sabras.coll8;
+package sabras.coll8.collection;
 
 import java.util.LinkedList;
 import java.util.List;

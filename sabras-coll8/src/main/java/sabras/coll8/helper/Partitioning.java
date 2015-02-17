@@ -1,4 +1,4 @@
-package sabras.coll8;
+package sabras.coll8.helper;
 
 import java.util.ArrayList;
 import java.util.Collection;
