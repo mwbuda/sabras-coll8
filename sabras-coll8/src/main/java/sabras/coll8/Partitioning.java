@@ -8,6 +8,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
+/**
+ * breaks an input collection into multiple lists of equal size (partitions)
+ * intended to break a larger sequence into manageable sub-chunks for processing
+ * 
+ * @author mbuda
+ *
+ * @param <X>
+ * @param <C>
+ */
 public interface Partitioning<X, C extends Collection<X>>
 extends Function<Collection<X>, List<C>>
 {
