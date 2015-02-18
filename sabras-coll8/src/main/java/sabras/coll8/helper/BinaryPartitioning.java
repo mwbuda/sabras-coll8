@@ -14,7 +14,7 @@ extends Function<X,List<byte[]>>{
 			return new IntoMax<>(max, x -> x.toString().getBytes()) ;
 		}
 		
-		public IntoMax<byte[]> fromByteArray(Integer max) {
+		public static IntoMax<byte[]> fromByteArray(Integer max) {
 			return new IntoMax<>(max, x -> x) ;
 		}
 		
