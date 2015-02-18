@@ -33,7 +33,8 @@ public final class CollectConvert {
 		if (ts == null) return Arrays.asList() ;
 		return () -> ts ;
 	}
-	public static <T> Iterable<T> newIterable(@SuppressWarnings("unchecked") T... ts) {
+	@SafeVarargs
+	public static <T> Iterable<T> newIterable(T... ts) {
 		return CollectConvert.newList(ts) ;
 	}
 	public static <T> Iterable<T> newIterable(Stream<T> ts) {
@@ -50,7 +51,8 @@ public final class CollectConvert {
 	public static <T> Collection<T> newCollection(Iterator<T> ts) {
 		return CollectConvert.newList(ts) ;
 	}
-	public static <T> Collection<T> newCollection(@SuppressWarnings("unchecked") T... ts) {
+	@SafeVarargs
+	public static <T> Collection<T> newCollection(T... ts) {
 		return CollectConvert.newList(ts) ;
 	}
 	public static <T> Collection<T> newCollection(Stream<T> ts) {
@@ -69,7 +71,8 @@ public final class CollectConvert {
 		if (ts == null) return new HashSet<>() ;
 		return CollectConvert.newSet( () -> ts ) ;
 	}
-	public static <T> Set<T> newSet(@SuppressWarnings("unchecked") T... ts) {
+	@SafeVarargs
+	public static <T> Set<T> newSet(T... ts) {
 		if (ts == null) return new HashSet<>() ;
 		return new HashSet<>(Arrays.asList(ts)) ;
 	}
@@ -89,7 +92,8 @@ public final class CollectConvert {
 	public static <T> SortedSet<T> newSortedSet(Iterator<T> ts) {
 		return CollectConvert.newNavigableSet(ts) ;
 	}
-	public static <T> SortedSet<T> newSortedSet(@SuppressWarnings("unchecked") T... ts) {
+	@SafeVarargs
+	public static <T> SortedSet<T> newSortedSet(T... ts) {
 		return CollectConvert.newNavigableSet(ts) ;
 	}
 	public static <T> SortedSet<T> newSortedSet(Stream<T> ts) {
@@ -108,7 +112,8 @@ public final class CollectConvert {
 		if (ts == null) return new TreeSet<>() ;
 		return CollectConvert.newNavigableSet( () -> ts ) ;
 	}
-	public static <T> NavigableSet<T> newNavigableSet(@SuppressWarnings("unchecked") T... ts) {
+	@SafeVarargs
+	public static <T> NavigableSet<T> newNavigableSet(T... ts) {
 		if (ts == null) return new TreeSet<>() ;
 		return new TreeSet<>(Arrays.asList(ts)) ;
 	}
@@ -130,7 +135,8 @@ public final class CollectConvert {
 		if (ts == null) return Arrays.asList() ;
 		return CollectConvert.newList( () -> ts ) ;
 	}
-	public static <T> List<T> newList(@SuppressWarnings("unchecked") T... ts) {
+	@SafeVarargs
+	public static <T> List<T> newList(T... ts) {
 		if (ts == null) return Arrays.asList() ;
 		return Arrays.asList(ts) ;
 	}
