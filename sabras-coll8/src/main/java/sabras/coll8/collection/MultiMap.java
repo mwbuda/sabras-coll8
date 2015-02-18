@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import sabras.coll8.helper.CollectConvert;
 
 public interface MultiMap<K,V,C extends Collection<V>> extends Map<K, C> {
 
@@ -23,4 +26,16 @@ public interface MultiMap<K,V,C extends Collection<V>> extends Map<K, C> {
 	}
 	
 	public C put(K k,Collection<V> vs) ;
+	
+	default public Collection<V> allValues() {
+		Collection<V> allvs = CollectConvert.<V>newCollection() ;
+		for (C vs : this.values()) allvs.addAll (vs) ;
+		return allvs ;
+	}
+	
+	default public Set<V> allUniqueValues() {
+		Set<V> allvs = CollectConvert.newSet() ;
+		for (C vs : this.values()) allvs.addAll(vs) ;
+		return allvs ;
+	}
 }
