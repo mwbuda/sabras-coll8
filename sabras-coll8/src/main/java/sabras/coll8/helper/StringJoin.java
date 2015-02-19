@@ -53,6 +53,8 @@ public class StringJoin {
 	public String join(Iterable<? extends Object> strs) {
 		StringBuilder builder = new StringBuilder() ;
 		for (Object str : strs) builder.append(str.toString()).append(this.separator) ;
-		return builder.toString() ;
+		//- (1 for end + sep length)
+		Integer len = builder.length() - (this.separator.length()) ;
+		return builder.substring(0, len) ;
 	}
 }
