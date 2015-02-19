@@ -1,12 +1,13 @@
 package sabras.coll8.helper;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 
 public interface BinaryPartitioning<X>
 extends Function<X,List<byte[]>>{
-
+	
 	public class IntoMax<X>
 	implements BinaryPartitioning<X> {
 		
@@ -40,6 +41,15 @@ extends Function<X,List<byte[]>>{
 			if (totalByteCount > derivedByteCount) partitionCount += 1 ;
 			
 			List<byte[]> results = new LinkedList<>() ;
+			
+			if (totalByteCount < this.maxPartitonSize) {
+				List<byte[]> result = new ArrayList<>() ;
+				byte[] partition = this.createPartition() ;
+				System.arraycopy(rawConvert, 0, partition, 0, rawConvert.length);
+				result.add(partition) ;
+				return result ;
+			}
+			
 			int s = 0 ;
 			int l = this.maxPartitonSize ;
 			int copied = 0 ;
