@@ -15,7 +15,8 @@ public interface MultiMap<K,V,C extends Collection<V>> extends Map<K, C> {
 	default public C appendOne(K k, V v) {
 		return this.append(k, v) ;
 	}
-	default public C append(K k, @SuppressWarnings("unchecked") V... vs) {
+	@SuppressWarnings("unchecked")
+	default public C append(K k, V... vs) {
 		return this.append(k, Arrays.asList(vs)) ;
 	}
 	default public C append(K k, Collection<V> vs) {
