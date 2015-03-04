@@ -24,7 +24,6 @@ public final class IterableCollate<X,K,V> {
 	public static <X,K,V> IterableCollate<X,K,V> parrallelOf(Function<X,K> ck, Function<X,V> cv) {
 		return new IterableCollate<X,K,V>(ck,cv,true) ;
 	}
-	
 	public static <X,K,V> IterableCollate<X,K,V> sequentialOf(Function<X,K> ck, Function<X,V> cv) {
 		return new IterableCollate<X,K,V>(ck,cv,false) ;
 	}
@@ -32,7 +31,6 @@ public final class IterableCollate<X,K,V> {
 	public static <K,V> IterableCollate<K,K,V> parallelOfValues(Function<K,V> cv) {
 		return IterableCollate.parrallelOf(k -> k, cv) ;
 	}
-	
 	public static <K,V> IterableCollate<K,K,V> sequentialOfValues(Function<K,V> cv) {
 		return IterableCollate.sequentialOf(k -> k, cv) ;
 	}
@@ -40,9 +38,60 @@ public final class IterableCollate<X,K,V> {
 	public static <K,V> IterableCollate<V,K,V> parallelOfKeys(Function<V,K> ck) {
 		return IterableCollate.parrallelOf(ck, v -> v) ;
 	}
-	
 	public static <K,V> IterableCollate<V,K,V> sequentialOfKeys(Function<V,K> ck) {
 		return IterableCollate.sequentialOf(ck, v -> v) ;
+	}
+	
+	public static <K,V> Map<K,V> parallelCollationOfValues(Function<K,V> cv, Iterable<K> ks) {
+		return IterableCollate.parallelOfValues(cv).apply(ks) ;
+	}
+	public static <K,V> Map<K,V> parallelCollationOfValues(Function<K,V> cv, Iterator<K> ks) {
+		return IterableCollate.parallelOfValues(cv).apply(ks) ;
+	}
+	public static <K,V> Map<K,V> parallelCollationOfValues(Function<K,V> cv, Spliterator<K> ks) {
+		return IterableCollate.parallelOfValues(cv).apply(ks) ;
+	}
+	public static <K,V> Map<K,V> parallelCollationOfValues(Function<K,V> cv, Stream<K> ks) {
+		return IterableCollate.parallelOfValues(cv).apply(ks) ;
+	}
+	
+	public static <K,V> Map<K,V> sequentialCollationOfValues(Function<K,V> cv, Iterable<K> ks) {
+		return IterableCollate.sequentialOfValues(cv).apply(ks) ;
+	}
+	public static <K,V> Map<K,V> sequentialCollationOfValues(Function<K,V> cv, Iterator<K> ks) {
+		return IterableCollate.sequentialOfValues(cv).apply(ks) ;
+	}
+	public static <K,V> Map<K,V> sequentialCollationOfValues(Function<K,V> cv, Spliterator<K> ks) {
+		return IterableCollate.sequentialOfValues(cv).apply(ks) ;
+	}
+	public static <K,V> Map<K,V> sequentialCollationOfValues(Function<K,V> cv, Stream<K> ks) {
+		return IterableCollate.sequentialOfValues(cv).apply(ks) ;
+	}
+	
+	public static <K,V> Map<K,V> parallelCollationOfKeys(Function<V,K> cv, Iterable<V> vs) {
+		return IterableCollate.parallelOfKeys(cv).apply(vs) ;
+	}
+	public static <K,V> Map<K,V> parallelCollationOfKeys(Function<V,K> cv, Iterator<V> vs) {
+		return IterableCollate.parallelOfKeys(cv).apply(vs) ;
+	}
+	public static <K,V> Map<K,V> parallelCollationOfKeys(Function<V,K> cv, Spliterator<V> vs) {
+		return IterableCollate.parallelOfKeys(cv).apply(vs) ;
+	}
+	public static <K,V> Map<K,V> parallelCollationOfKeys(Function<V,K> cv, Stream<V> vs) {
+		return IterableCollate.parallelOfKeys(cv).apply(vs) ;
+	}
+	
+	public static <K,V> Map<K,V> sequentialCollationOfKeys(Function<V,K> cv, Iterable<V> vs) {
+		return IterableCollate.sequentialOfKeys(cv).apply(vs) ;
+	}
+	public static <K,V> Map<K,V> sequentialCollationOfKeys(Function<V,K> cv, Iterator<V> vs) {
+		return IterableCollate.sequentialOfKeys(cv).apply(vs) ;
+	}
+	public static <K,V> Map<K,V> sequentialCollationOfKeys(Function<V,K> cv, Spliterator<V> vs) {
+		return IterableCollate.sequentialOfKeys(cv).apply(vs) ;
+	}
+	public static <K,V> Map<K,V> sequentialCollationOfKeys(Function<V,K> cv, Stream<V> vs) {
+		return IterableCollate.sequentialOfKeys(cv).apply(vs) ;
 	}
 	
 	private IterableCollate(Function<X,K> ck, Function<X,V> cv, Boolean p) {
