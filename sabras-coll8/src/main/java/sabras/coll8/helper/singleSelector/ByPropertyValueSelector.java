@@ -1,8 +1,7 @@
 package sabras.coll8.helper.singleSelector;
 
-import java.lang.reflect.Method;
-
 import sabras.coll8.helper.CollectConvert;
+import sabras.coll8.helper.GetterValue;
 
 /**
  * single selector which returns 1st object found to match the given property value
@@ -14,7 +13,7 @@ public class ByPropertyValueSelector<X,PV>
 implements SingleSelector<X> {
 
 	private final PV vx ;
-	private final Method mx ;
+	private final GetterValue<X, PV> mx ;
 	
 	@SafeVarargs
 	public static final <X,PV> X doSelectionFor(Class<X> xt, String pn, PV v, X... xs ) {
@@ -31,27 +30,14 @@ implements SingleSelector<X> {
 	
 	private ByPropertyValueSelector(Class<X> xt, String pn, PV v) {
 		this.vx = v ;
-		String firstChar = "" + pn.charAt(0) ;
-		String pnx = pn.replaceFirst("[" + firstChar +  "]", firstChar.toUpperCase()) ; 
-		Method m = null ;
-		try {
-			m = xt.getMethod("get" + pnx) ;
-		}
-		catch (NoSuchMethodException nsme) {
-			//nothing 
-		}
-		this.mx = m ;
+		this.mx = new GetterValue<>(xt, pn, v) ;
 	}
 	
 	@Override
 	public X apply(Iterable<X> xs) {
 		for (X x : xs) {
-			try {
-				PV xv = (PV) this.mx.invoke(x) ;
-				if (xv.equals(this.vx)) return x ;
-			} catch (Throwable e) {
-				continue ;
-			}
+			PV xv = this.mx.apply(x) ;
+			if (xv.equals(this.vx)) return x ;
 		}
 
 		return null;
