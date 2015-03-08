@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.NavigableSet;
 import java.util.Set;
@@ -137,8 +138,9 @@ public final class CollectConvert {
 	}
 	@SafeVarargs
 	public static <T> List<T> newList(T... ts) {
-		if (ts == null) return Arrays.asList() ;
-		return Arrays.asList(ts) ;
+		List<T> results = new LinkedList<>() ;
+		if (ts != null) results.addAll(Arrays.asList(ts));
+		return results ;
 	}
 	public static <T> List<T> newList(Stream<T> ts) {
 		if (ts == null) return Arrays.asList() ;
