@@ -1,6 +1,5 @@
 package sabras.coll8.collection;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -32,14 +31,12 @@ public interface MultiMap<K,V,C extends Iterable<V>> extends Map<K, C> {
 	public C put(K k, Iterable<V> vs) ;
 	
 	default public Iterable<V> allValues() {
-		Collection<V> allvs = CollectConvert.<V>newCollection() ;
-		for (C vs : this.values()) allvs.addAll(CollectConvert.newCollection(vs)) ;
+		List<V> allvs = CollectConvert.newList() ;
+		for (C vs : this.values()) if (vs != null) allvs.addAll(CollectConvert.newCollection(vs)) ;
 		return allvs ;
 	}
 	
 	default public Set<V> allUniqueValues() {
-		Set<V> allvs = CollectConvert.newSet() ;
-		for (C vs : this.values()) allvs.addAll(CollectConvert.newCollection(vs)) ;
-		return allvs ;
+		return CollectConvert.newSet(CollectConvert.newCollection( this.allValues() )) ;
 	}
 }
