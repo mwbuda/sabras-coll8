@@ -51,6 +51,7 @@ public class StringJoin {
 		return this.join( StreamSupport.stream(strs, false)) ;
 	}
 	public String join(Iterable<? extends Object> strs) {
+		if (CollectConvert.newCollection(strs).isEmpty()) return ""	;
 		StringBuilder builder = new StringBuilder() ;
 		for (Object str : strs) builder.append(str.toString()).append(this.separator) ;
 		//- (1 for end + sep length)
