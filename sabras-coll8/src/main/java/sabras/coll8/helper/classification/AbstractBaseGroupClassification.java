@@ -72,8 +72,7 @@ implements GroupClassification<X, K, V, C> {
 		MM mm = this.createMultiMap() ;
 		
 		xs.map(this.convertItem).forEachOrdered(xp -> mm.appendOne(
-			xp.getK(), 
-			xp.getV()
+			xp.getK(), xp.getV()
 		)); 
 		
 		return mm ;

@@ -13,10 +13,10 @@ implements GroupSetClassification<X, K, V>  {
 	public static <X,K,V> GroupSetClassification<X,K,V> create(Function<X,K> ck, Function<X,V> cv) {
 		return HashSetGroupClassification.parallelOf(ck, cv) ;
 	}
-	public static <X,K,V> GroupSetClassification<X, K, V> parallelOf(Function<X,K> ck, Function<X,V> cv) {
+	public static <X,K,V> GroupSetClassification<X,K,V> parallelOf(Function<X,K> ck, Function<X,V> cv) {
 		return new HashSetGroupClassification<X,K,V>(ck,cv,true) ;
 	}
-	public static <X,K,V> GroupSetClassification<X, K, V> sequentialOf(Function<X,K> ck, Function<X,V> cv) {
+	public static <X,K,V> GroupSetClassification<X,K,V> sequentialOf(Function<X,K> ck, Function<X,V> cv) {
 		return new HashSetGroupClassification<X,K,V>(ck,cv,false) ;
 	}
 	
