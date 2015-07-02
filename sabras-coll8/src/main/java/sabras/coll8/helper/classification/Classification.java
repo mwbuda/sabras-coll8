@@ -8,116 +8,80 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 public interface Classification<X, K, V> {
-
-	public static <X,K,V> Classification<X,K,V> ofKeysAndValues(
+	
+	public static <X,K,V> Map<K,V> classify(
 		BiFunction<Function<X,K>, Function<X,V>, Classification<X,K,V>> factory,
-		Function<X,K> ck,
-		Function<X,V> cv
+		Function<X,K> ck, Function<X,V> cv, Iterable<X> xs
 	) {
-		return factory.apply(ck,cv) ;
+		return factory.apply(ck,cv).apply(xs) ;
 	}
-	public static <X,K> Classification<X,K,X> ofKeys(
-		BiFunction<Function<X,K>, Function<X,X>, Classification<X,K,X>> factory,
-		Function<X,K> ck
+	public static <X,K,V> Map<K,V> classify(
+		BiFunction<Function<X,K>, Function<X,V>, Classification<X,K,V>> factory,
+		Function<X,K> ck, Function<X,V> cv, Iterator<X> xs
 	) {
-		return Classification.ofKeysAndValues(factory, ck, v -> v) ;
+		return factory.apply(ck,cv).apply(xs) ;
 	}
-	public static <X,V> Classification<X,X,V> ofValues(
-		BiFunction<Function<X,X>, Function<X,V>, Classification<X,X,V>> factory,
-		Function<X,V> cv	
+	public static <X,K,V> Map<K,V> classify(
+		BiFunction<Function<X,K>, Function<X,V>, Classification<X,K,V>> factory,
+		Function<X,K> ck, Function<X,V> cv, Spliterator<X> xs
 	) {
-		return Classification.ofKeysAndValues(factory, k -> k, cv) ;
+		return factory.apply(ck,cv).apply(xs) ;
+	}
+	public static <X,K,V> Map<K,V> classify(
+		BiFunction<Function<X,K>, Function<X,V>, Classification<X,K,V>> factory,
+		Function<X,K> ck, Function<X,V> cv, Stream<X> xs
+	) {
+		return factory.apply(ck,cv).apply(xs) ;
 	}
 	
-	public static <X,K,V> Map<K,V> applyForKeysAndValues(
-		BiFunction<Function<X,K>, Function<X,V>, Classification<X,K,V>> factory,
-		Function<X,K> ck,
-		Function<X,V> cv,
-		Iterable<X> xs
-	) {
-		return Classification.ofKeysAndValues(factory, ck, cv).apply(xs) ;
-	}
-	public static <X,K,V> Map<K,V> applyForKeysAndValues(
-		BiFunction<Function<X,K>, Function<X,V>, Classification<X,K,V>> factory,
-		Function<X,K> ck,
-		Function<X,V> cv,
-		Iterator<X> xs
-	) {
-		return Classification.ofKeysAndValues(factory, ck, cv).apply(xs) ;
-	}
-	public static <X,K,V> Map<K,V> applyForKeysAndValues(
-		BiFunction<Function<X,K>, Function<X,V>, Classification<X,K,V>> factory,
-		Function<X,K> ck,
-		Function<X,V> cv,
-		Spliterator<X> xs
-	) {
-		return Classification.ofKeysAndValues(factory, ck, cv).apply(xs) ;
-	}
-	public static <X,K,V> Map<K,V> applyForKeysAndValues(
-		BiFunction<Function<X,K>, Function<X,V>, Classification<X,K,V>> factory,
-		Function<X,K> ck,
-		Function<X,V> cv,
-		Stream<X> xs
-	) {
-		return Classification.ofKeysAndValues(factory, ck, cv).apply(xs) ;
-	}
-	
-	public static <X,K> Map<K,X> applyForKeys(
+	public static <X,K> Map<K,X> classifyForKeys(
 		BiFunction<Function<X,K>, Function<X,X>, Classification<X,K,X>> factory,
-		Function<X,K> ck,
-		Iterable<X> xs
+		Function<X,K> ck, Iterable<X> xs
 	) {
-		return Classification.ofKeys(factory, ck).apply(xs) ;
+		return factory.apply(ck,x -> x).apply(xs) ;
 	}
-	public static <X,K> Map<K,X> applyForKeys(
+	public static <X,K> Map<K,X> classifyForKeys(
 		BiFunction<Function<X,K>, Function<X,X>, Classification<X,K,X>> factory,
-		Function<X,K> ck,
-		Iterator<X> xs
+		Function<X,K> ck, Iterator<X> xs
 	) {
-		return Classification.ofKeys(factory, ck).apply(xs) ;
+		return factory.apply(ck,x -> x).apply(xs) ;
 	}
-	public static <X,K> Map<K,X> applyForKeys(
+	public static <X,K> Map<K,X> classifyForKeys(
 		BiFunction<Function<X,K>, Function<X,X>, Classification<X,K,X>> factory,
-		Function<X,K> ck,
-		Spliterator<X> xs
+		Function<X,K> ck, Spliterator<X> xs
 	) {
-		return Classification.ofKeys(factory, ck).apply(xs) ;
+		return factory.apply(ck,x -> x).apply(xs) ;
 	}
-	public static <X,K> Map<K,X> applyForKeys(
+	public static <X,K> Map<K,X> classifyForKeys(
 		BiFunction<Function<X,K>, Function<X,X>, Classification<X,K,X>> factory,
-		Function<X,K> ck,
-		Stream<X> xs
+		Function<X,K> ck, Stream<X> xs
 	) {
-		return Classification.ofKeys(factory, ck).apply(xs) ;
+		return factory.apply(ck,x -> x).apply(xs) ;
 	}
 		
-	public static <X,V> Map<X,V> applyForValues(
+	public static <X,V> Map<X,V> classifyForValues(
 		BiFunction<Function<X,X>, Function<X,V>, Classification<X,X,V>> factory,
-		Function<X,V> cv,
-		Iterable<X> xs
+		Function<X,V> cv, Iterable<X> xs
 	) {
-		return Classification.ofValues(factory, cv).apply(xs) ;
+		return factory.apply(x -> x,cv).apply(xs) ;
 	}
-	public static <X,V> Map<X,V> applyForValues(
+	public static <X,V> Map<X,V> classifyForValues(
 		BiFunction<Function<X,X>, Function<X,V>, Classification<X,X,V>> factory,
-		Function<X,V> cv,
-		Iterator<X> xs
+		Function<X,V> cv, Iterator<X> xs
 	) {
-		return Classification.ofValues(factory, cv).apply(xs) ;
+		return factory.apply(x -> x,cv).apply(xs) ;
 	}
-	public static <X,V> Map<X,V> applyForValues(
+	public static <X,V> Map<X,V> classifyForValues(
 		BiFunction<Function<X,X>, Function<X,V>, Classification<X,X,V>> factory,
-		Function<X,V> cv,
-		Spliterator<X> xs
+		Function<X,V> cv, Spliterator<X> xs
 	) {
-		return Classification.ofValues(factory, cv).apply(xs) ;
+		return factory.apply(x -> x,cv).apply(xs) ;
 	}
-	public static <X,V> Map<X,V> applyForValues(
+	public static <X,V> Map<X,V> classifyForValues(
 		BiFunction<Function<X,X>, Function<X,V>, Classification<X,X,V>> factory,
-		Function<X,V> cv,
-		Stream<X> xs
+		Function<X,V> cv, Stream<X> xs
 	) {
-		return Classification.ofValues(factory, cv).apply(xs) ;
+		return factory.apply(x -> x,cv).apply(xs) ;
 	}
 	
 	public abstract Map<K, V> apply(Iterable<X> xs);

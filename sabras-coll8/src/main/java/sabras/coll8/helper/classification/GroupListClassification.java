@@ -12,80 +12,58 @@ import sabras.coll8.collection.ListMultiMap;
 public interface GroupListClassification<X,K,V> 
 extends GroupClassification<X, K, V, List<V>> {
 	
-	public static <X,K,V> GroupListClassification<X,K,V> ofKeysAndValues(
+	public static <X,K,V> ListMultiMap<K,V> classify(
 		BiFunction<Function<X,K>, Function<X,V>, GroupListClassification<X,K,V>> factory,
-		Function<X,K> ck,
-		Function<X,V> cv
+		Function<X,K> ck, Function<X,V> cv, Iterable<X> xs
 	) {
-		return factory.apply(ck, cv) ;
+		return factory.apply(ck, cv).apply(xs) ;
 	}
-	public static <X,K> GroupListClassification<X,K,X> ofKeys(
-		BiFunction<Function<X,K>, Function<X,X>, GroupListClassification<X,K,X>> factory,
-		Function<X,K> ck
+	public static <X,K,V> ListMultiMap<K,V> classify(
+		BiFunction<Function<X,K>, Function<X,V>, GroupListClassification<X,K,V>> factory,
+		Function<X,K> ck, Function<X,V> cv, Iterator<X> xs
 	) {
-		return GroupListClassification.ofKeysAndValues(factory, ck, v -> v) ;
+		return factory.apply(ck, cv).apply(xs) ;
+	}
+	public static <X,K,V> ListMultiMap<K,V> classify(
+		BiFunction<Function<X,K>, Function<X,V>, GroupListClassification<X,K,V>> factory,
+		Function<X,K> ck, Function<X,V> cv, Spliterator<X> xs
+	) {
+		return factory.apply(ck, cv).apply(xs) ;
+	}
+	public static <X,K,V> ListMultiMap<K,V> classify(
+		BiFunction<Function<X,K>, Function<X,V>, GroupListClassification<X,K,V>> factory,
+		Function<X,K> ck, Function<X,V> cv, Stream<X> xs
+	) {
+		return factory.apply(ck, cv).apply(xs) ;
 	}
 	
-	public static <X,K,V> ListMultiMap<K,V> applyForKeysAndValues(
-		BiFunction<Function<X,K>, Function<X,V>, GroupListClassification<X,K,V>> factory,
-		Function<X,K> ck,
-		Function<X,V> cv,
-		Iterable<X> xs
-	) {
-		return GroupListClassification.ofKeysAndValues(factory, ck, cv).apply(xs) ;
-	}
-	public static <X,K,V> ListMultiMap<K,V> applyForKeysAndValues(
-		BiFunction<Function<X,K>, Function<X,V>, GroupListClassification<X,K,V>> factory,
-		Function<X,K> ck,
-		Function<X,V> cv,
-		Iterator<X> xs
-	) {
-		return GroupListClassification.ofKeysAndValues(factory, ck, cv).apply(xs) ;
-	}
-	public static <X,K,V> ListMultiMap<K,V> applyForKeysAndValues(
-		BiFunction<Function<X,K>, Function<X,V>, GroupListClassification<X,K,V>> factory,
-		Function<X,K> ck,
-		Function<X,V> cv,
-		Spliterator<X> xs
-	) {
-		return GroupListClassification.ofKeysAndValues(factory, ck, cv).apply(xs) ;
-	}
-	public static <X,K,V> ListMultiMap<K,V> applyForKeysAndValues(
-		BiFunction<Function<X,K>, Function<X,V>, GroupListClassification<X,K,V>> factory,
-		Function<X,K> ck,
-		Function<X,V> cv,
-		Stream<X> xs
-	) {
-		return GroupListClassification.ofKeysAndValues(factory, ck, cv).apply(xs) ;
-	}
-	
-	public static <X,K extends Iterable<X>> ListMultiMap<K,X> applyForKeys(
+	public static <X,K extends Iterable<X>> ListMultiMap<K,X> classifyForKeys(
 		BiFunction<Function<X,K>, Function<X,X>, GroupListClassification<X,K,X>> factory,
 		Function<X,K> ck,
 		Iterable<X> xs
 	) {
-		return GroupListClassification.ofKeys(factory, ck).apply(xs) ;
+		return factory.apply(ck, x -> x).apply(xs) ;
 	}
-	public static <X,K extends Iterable<X>> ListMultiMap<K,X> applyForKeys(
+	public static <X,K extends Iterable<X>> ListMultiMap<K,X> classifyForKeys(
 		BiFunction<Function<X,K>, Function<X,X>, GroupListClassification<X,K,X>> factory,
 		Function<X,K> ck,
 		Iterator<X> xs
 	) {
-		return GroupListClassification.ofKeys(factory, ck).apply(xs) ;
+		return factory.apply(ck, x -> x).apply(xs) ;
 	}
-	public static <X,K extends Iterable<X>> ListMultiMap<K,X> applyForKeys(
+	public static <X,K extends Iterable<X>> ListMultiMap<K,X> classifyForKeys(
 		BiFunction<Function<X,K>, Function<X,X>, GroupListClassification<X,K,X>> factory,
 		Function<X,K> ck,
 		Spliterator<X> xs
 	) {
-		return GroupListClassification.ofKeys(factory, ck).apply(xs) ;
+		return factory.apply(ck, x -> x).apply(xs) ;
 	}
-	public static <X,K extends Iterable<X>> ListMultiMap<K,X> applyForKeys(
+	public static <X,K extends Iterable<X>> ListMultiMap<K,X> classifyForKeys(
 		BiFunction<Function<X,K>, Function<X,X>, GroupListClassification<X,K,X>> factory,
 		Function<X,K> ck,
 		Stream<X> xs
 	) {
-		return GroupListClassification.ofKeys(factory, ck).apply(xs) ;
+		return factory.apply(ck, x -> x).apply(xs) ;
 	}
 
 	public abstract ListMultiMap<K, V> apply(Iterable<X> xs);

@@ -23,9 +23,9 @@ implements Classification<X, K, V> {
 	private final Boolean isParallel ;
 	
 	public static <X,K,V> Classification<X,K,V> create(Function<X,K> ck, Function<X,V> cv) {
-		return BasicClassification.parrallelOf(ck, cv) ;
+		return BasicClassification.parallelOf(ck, cv) ;
 	}
-	public static <X,K,V> Classification<X, K, V> parrallelOf(Function<X,K> ck, Function<X,V> cv) {
+	public static <X,K,V> Classification<X,K,V> parallelOf(Function<X,K> ck, Function<X,V> cv) {
 		return new BasicClassification<X,K,V>(ck,cv,true) ;
 	}
 	public static <X,K,V> Classification<X, K, V> sequentialOf(Function<X,K> ck, Function<X,V> cv) {

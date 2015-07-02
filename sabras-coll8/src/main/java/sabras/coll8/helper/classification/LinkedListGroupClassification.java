@@ -11,9 +11,9 @@ extends AbstractBaseGroupClassification<X,K,V,List<V>,ListMultiMap<K,V>>
 implements GroupListClassification<X, K, V>  {
 	
 	public static <X,K,V> GroupListClassification<X,K,V> create(Function<X,K> ck, Function<X,V> cv) {
-		return LinkedListGroupClassification.parrallelOf(ck, cv) ;
+		return LinkedListGroupClassification.parallelOf(ck, cv) ;
 	}
-	public static <X,K,V> GroupListClassification<X, K, V> parrallelOf(Function<X,K> ck, Function<X,V> cv) {
+	public static <X,K,V> GroupListClassification<X, K, V> parallelOf(Function<X,K> ck, Function<X,V> cv) {
 		return new LinkedListGroupClassification<X,K,V>(ck,cv,true) ;
 	}
 	public static <X,K,V> GroupListClassification<X, K, V> sequentialOf(Function<X,K> ck, Function<X,V> cv) {
