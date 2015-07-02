@@ -22,77 +22,14 @@ implements Classification<X, K, V> {
 	private final Collector<X, ?, Map<K, V>> collector ;
 	private final Boolean isParallel ;
 	
+	public static <X,K,V> Classification<X,K,V> create(Function<X,K> ck, Function<X,V> cv) {
+		return BasicClassification.parrallelOf(ck, cv) ;
+	}
 	public static <X,K,V> Classification<X, K, V> parrallelOf(Function<X,K> ck, Function<X,V> cv) {
 		return new BasicClassification<X,K,V>(ck,cv,true) ;
 	}
 	public static <X,K,V> Classification<X, K, V> sequentialOf(Function<X,K> ck, Function<X,V> cv) {
 		return new BasicClassification<X,K,V>(ck,cv,false) ;
-	}
-	
-	public static <K,V> Classification<K, K, V> parallelOfValues(Function<K,V> cv) {
-		return BasicClassification.parrallelOf(k -> k, cv) ;
-	}
-	public static <K,V> Classification<K, K, V> sequentialOfValues(Function<K,V> cv) {
-		return BasicClassification.sequentialOf(k -> k, cv) ;
-	}
-	
-	public static <K,V> Classification<V, K, V> parallelOfKeys(Function<V,K> ck) {
-		return BasicClassification.parrallelOf(ck, v -> v) ;
-	}
-	public static <K,V> Classification<V, K, V> sequentialOfKeys(Function<V,K> ck) {
-		return BasicClassification.sequentialOf(ck, v -> v) ;
-	}
-	
-	public static <K,V> Map<K,V> parallelClassificationOfValues(Function<K,V> cv, Iterable<K> ks) {
-		return BasicClassification.parallelOfValues(cv).apply(ks) ;
-	}
-	public static <K,V> Map<K,V> parallelClassificationOfValues(Function<K,V> cv, Iterator<K> ks) {
-		return BasicClassification.parallelOfValues(cv).apply(ks) ;
-	}
-	public static <K,V> Map<K,V> parallelClassificationOfValues(Function<K,V> cv, Spliterator<K> ks) {
-		return BasicClassification.parallelOfValues(cv).apply(ks) ;
-	}
-	public static <K,V> Map<K,V> parallelClassificationOfValues(Function<K,V> cv, Stream<K> ks) {
-		return BasicClassification.parallelOfValues(cv).apply(ks) ;
-	}
-	
-	public static <K,V> Map<K,V> sequentialClassificationOfValues(Function<K,V> cv, Iterable<K> ks) {
-		return BasicClassification.sequentialOfValues(cv).apply(ks) ;
-	}
-	public static <K,V> Map<K,V> sequentialClassificationOfValues(Function<K,V> cv, Iterator<K> ks) {
-		return BasicClassification.sequentialOfValues(cv).apply(ks) ;
-	}
-	public static <K,V> Map<K,V> sequentialClassificationOfValues(Function<K,V> cv, Spliterator<K> ks) {
-		return BasicClassification.sequentialOfValues(cv).apply(ks) ;
-	}
-	public static <K,V> Map<K,V> sequentialClassificationOfValues(Function<K,V> cv, Stream<K> ks) {
-		return BasicClassification.sequentialOfValues(cv).apply(ks) ;
-	}
-	
-	public static <K,V> Map<K,V> parallelClassificationOfKeys(Function<V,K> cv, Iterable<V> vs) {
-		return BasicClassification.parallelOfKeys(cv).apply(vs) ;
-	}
-	public static <K,V> Map<K,V> parallelClassificationOfKeys(Function<V,K> cv, Iterator<V> vs) {
-		return BasicClassification.parallelOfKeys(cv).apply(vs) ;
-	}
-	public static <K,V> Map<K,V> parallelClassificationOfKeys(Function<V,K> cv, Spliterator<V> vs) {
-		return BasicClassification.parallelOfKeys(cv).apply(vs) ;
-	}
-	public static <K,V> Map<K,V> parallelClassificationOfKeys(Function<V,K> cv, Stream<V> vs) {
-		return BasicClassification.parallelOfKeys(cv).apply(vs) ;
-	}
-	
-	public static <K,V> Map<K,V> sequentialClassificationOfKeys(Function<V,K> cv, Iterable<V> vs) {
-		return BasicClassification.sequentialOfKeys(cv).apply(vs) ;
-	}
-	public static <K,V> Map<K,V> sequentialClassificationOfKeys(Function<V,K> cv, Iterator<V> vs) {
-		return BasicClassification.sequentialOfKeys(cv).apply(vs) ;
-	}
-	public static <K,V> Map<K,V> sequentialClassificationOfKeys(Function<V,K> cv, Spliterator<V> vs) {
-		return BasicClassification.sequentialOfKeys(cv).apply(vs) ;
-	}
-	public static <K,V> Map<K,V> sequentialClassificationOfKeys(Function<V,K> cv, Stream<V> vs) {
-		return BasicClassification.sequentialOfKeys(cv).apply(vs) ;
 	}
 	
 	private BasicClassification(Function<X,K> ck, Function<X,V> cv, Boolean p) {
