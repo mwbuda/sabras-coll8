@@ -20,6 +20,16 @@ implements GroupSetClassification<X, K, V>  {
 		return new HashSetGroupClassification<X,K,V>(ck,cv,false) ;
 	}
 	
+	public static <X,K> GroupSetClassification<X,K,X> ofKeys(Function<X,K> ck) {
+		return HashSetGroupClassification.create(ck, x -> x) ;
+	}
+	public static <X,K> GroupSetClassification<X,K,X> parallelOfKeys(Function<X,K> ck) {
+		return HashSetGroupClassification.parallelOf(ck, x -> x) ;
+	}
+	public static <X,K> GroupSetClassification<X,K,X> sequentialOfKeys(Function<X,K> ck) {
+		return HashSetGroupClassification.sequentialOf(ck, x -> x) ;
+	}
+	
 	private HashSetGroupClassification(Function<X,K> ck, Function<X,V> cv, Boolean p ) {
 		super(ck,cv,p) ;
 	}

@@ -20,6 +20,16 @@ implements GroupListClassification<X, K, V>  {
 		return new LinkedListGroupClassification<X,K,V>(ck,cv,false) ;
 	}
 	
+	public static <X,K> GroupListClassification<X,K,X> ofKeys(Function<X,K> ck) {
+		return LinkedListGroupClassification.create(ck, x -> x) ;
+	}
+	public static <X,K> GroupListClassification<X,K,X> parallelOfKeys(Function<X,K> ck) {
+		return LinkedListGroupClassification.parallelOf(ck, x -> x) ;
+	}
+	public static <X,K> GroupListClassification<X,K,X> sequentialOfKeys(Function<X,K> ck) {
+		return LinkedListGroupClassification.sequentialOf(ck, x -> x) ;
+	}
+	
 	private LinkedListGroupClassification(Function<X,K> ck, Function<X,V> cv, Boolean p ) {
 		super(ck,cv,p) ;
 	}

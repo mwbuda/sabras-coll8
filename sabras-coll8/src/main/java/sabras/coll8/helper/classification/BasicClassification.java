@@ -32,6 +32,26 @@ implements Classification<X, K, V> {
 		return new BasicClassification<X,K,V>(ck,cv,false) ;
 	}
 	
+	public static <X,K> Classification<X,K,X> ofKeys(Function<X,K> ck) {
+		return BasicClassification.create(ck, x -> x) ;
+	}
+	public static <X,K> Classification<X,K,X> parallelOfKeys(Function<X,K> ck) {
+		return BasicClassification.parallelOf(ck, x -> x) ;
+	}
+	public static <X,K> Classification<X,K,X> sequentialOfKeys(Function<X,K> ck) {
+		return BasicClassification.sequentialOf(ck, x -> x) ;
+	}
+	
+	public static <X,V> Classification<X,X,V> ofValues(Function<X,V> cv) {
+		return BasicClassification.create(x -> x, cv) ;
+	}
+	public static <X,K> Classification<X,K,X> parallelOfValues(Function<X,K> ck) {
+		return BasicClassification.parallelOf(ck, x -> x) ;
+	}
+	public static <X,K> Classification<X,K,X> sequentialOfValues(Function<X,K> ck) {
+		return BasicClassification.sequentialOf(ck, x -> x) ;
+	}
+	
 	private BasicClassification(Function<X,K> ck, Function<X,V> cv, Boolean p) {
 		this.convertKeys = ck ;
 		this.convertValues = cv ;
