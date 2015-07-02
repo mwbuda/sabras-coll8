@@ -37,28 +37,28 @@ extends GroupClassification<X, K, V, Set<V>> {
 		return factory.apply(ck, cv).apply(xs) ;
 	}
 	
-	public static <X,K extends Iterable<X>> SetMultiMap<K,X> classifyForKeys(
+	public static <X,K> SetMultiMap<K,X> classifyForKeys(
 		BiFunction<Function<X,K>, Function<X,X>, GroupSetClassification<X,K,X>> factory,
 		Function<X,K> ck,
 		Iterable<X> xs
 	) {
 		return factory.apply(ck, x -> x).apply(xs) ;
 	}
-	public static <X,K extends Iterable<X>> SetMultiMap<K,X> classifyForKeys(
+	public static <X,K> SetMultiMap<K,X> classifyForKeys(
 		BiFunction<Function<X,K>, Function<X,X>, GroupSetClassification<X,K,X>> factory,
 		Function<X,K> ck,
 		Iterator<X> xs
 	) {
 		return factory.apply(ck, x -> x).apply(xs) ;
 	}
-	public static <X,K extends Iterable<X>> SetMultiMap<K,X> classifyForKeys(
+	public static <X,K> SetMultiMap<K,X> classifyForKeys(
 		BiFunction<Function<X,K>, Function<X,X>, GroupSetClassification<X,K,X>> factory,
 		Function<X,K> ck,
 		Spliterator<X> xs
 	) {
 		return factory.apply(ck, x -> x).apply(xs) ;
 	}
-	public static <X,K extends Iterable<X>> SetMultiMap<K,X> classifyForKeys(
+	public static <X,K> SetMultiMap<K,X> classifyForKeys(
 		BiFunction<Function<X,K>, Function<X,X>, GroupSetClassification<X,K,X>> factory,
 		Function<X,K> ck,
 		Stream<X> xs
