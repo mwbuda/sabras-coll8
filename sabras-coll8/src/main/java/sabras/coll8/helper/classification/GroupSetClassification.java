@@ -1,4 +1,4 @@
-package sabras.coll8.helper.collation;
+package sabras.coll8.helper.classification;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 
 import sabras.coll8.collection.SetMultiMap;
 
-public interface IterableGroupSetCollate<X,K,V> 
-extends IterableGroupCollate<X, K, V, Set<V>> {
+public interface GroupSetClassification<X,K,V> 
+extends GroupClassification<X, K, V, Set<V>> {
 
 	public abstract SetMultiMap<K, V> apply(Iterable<X> xs);
 

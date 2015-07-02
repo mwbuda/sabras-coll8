@@ -1,4 +1,4 @@
-package sabras.coll8.helper.collation;
+package sabras.coll8.helper.classification;
 
 import java.util.Iterator;
 import java.util.Spliterator;
@@ -9,8 +9,12 @@ import java.util.stream.StreamSupport;
 import sabras.coll8.collection.MultiMap;
 
 
-public abstract class AbstractBaseIterableGroupCollate<X,K,V, C extends Iterable<V>, MM extends MultiMap<K,V,C>> 
-implements IterableGroupCollate<X, K, V, C> {
+public abstract class AbstractBaseGroupClassification<
+	X,K,V, 
+	C extends Iterable<V>, 
+	MM extends MultiMap<K,V,C>
+> 
+implements GroupClassification<X, K, V, C> {
 	
 	private static class XPair<PK,PV> {
 		private final PK k ;
@@ -37,7 +41,7 @@ implements IterableGroupCollate<X, K, V, C> {
 	
 	protected abstract MM createMultiMap() ;
 	
-	protected AbstractBaseIterableGroupCollate(Function<X,K> ck, Function<X,V> cv, Boolean p) {
+	protected AbstractBaseGroupClassification(Function<X,K> ck, Function<X,V> cv, Boolean p) {
 		this.convertKeys = ck ;
 		this.convertValues = cv ;
 		this.convertItem = (x) -> new XPair<>(

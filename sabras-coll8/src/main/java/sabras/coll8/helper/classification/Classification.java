@@ -1,4 +1,4 @@
-package sabras.coll8.helper.collation;
+package sabras.coll8.helper.classification;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Spliterator;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public interface IterableCollate<X, K, V> {
+public interface Classification<X, K, V> {
 
 	public abstract Map<K, V> apply(Iterable<X> xs);
 
