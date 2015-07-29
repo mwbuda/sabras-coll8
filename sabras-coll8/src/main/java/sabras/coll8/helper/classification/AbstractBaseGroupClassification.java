@@ -1,5 +1,6 @@
 package sabras.coll8.helper.classification;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Function;
@@ -11,7 +12,7 @@ import sabras.coll8.collection.MultiMap;
 
 public abstract class AbstractBaseGroupClassification<
 	X,K,V, 
-	C extends Iterable<V>, 
+	C extends Collection<V>, 
 	MM extends MultiMap<K,V,C>
 > 
 implements GroupClassification<X, K, V, C> {
