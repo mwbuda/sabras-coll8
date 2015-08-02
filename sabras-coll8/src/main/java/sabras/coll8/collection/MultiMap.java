@@ -61,4 +61,10 @@ public interface MultiMap<K,V,C extends Collection<V>> extends Map<K, C> {
 	default public Set<V> allUniqueValues() {
 		return CollectConvert.newSet(CollectConvert.newCollection( this.allValues() )) ;
 	}
+	
+	default public Long valuesCount() {
+		Long vc = 0l ;
+		for (C vs : this.values()) vc += vs.size() ;
+		return vc ;
+	}
 }
