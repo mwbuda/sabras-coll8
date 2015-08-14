@@ -1,6 +1,6 @@
 package sabras.coll8.helper.singleSelector;
 
-import sabras.coll8.helper.CollectConvert;
+import sabras.coll8.helper.IterMaker;
 import sabras.coll8.helper.GetterValue;
 
 /**
@@ -17,7 +17,7 @@ implements SingleSelector<X> {
 	
 	@SafeVarargs
 	public static final <X,PV> X doSelectionFor(Class<X> xt, String pn, PV v, X... xs ) {
-		return ByGetterSingleSelector.doSelectionFor(xt, pn, v, CollectConvert.newIterable(xs)) ;
+		return ByGetterSingleSelector.doSelectionFor(xt, pn, v, IterMaker.newIterable(xs)) ;
 	}
 	public static final <X,PV> X doSelectionFor(Class<X> xt, String pn, PV v, Iterable<X> xs ) {
 		ByGetterSingleSelector<X, PV> finder = ByGetterSingleSelector.selectorFor(xt, pn, v) ;

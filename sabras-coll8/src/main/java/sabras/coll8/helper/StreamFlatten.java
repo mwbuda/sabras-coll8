@@ -45,7 +45,7 @@ extends Function<Stream<? extends Iterable<X>>, C>, Collector<Iterable<X>, C, C>
 		@Override
 		public C apply(Stream<? extends Iterable<X>> xxs) {
 			C accum = this.accumType() ;
-			xxs.forEach(xs -> accum.addAll(CollectConvert.newCollection(xs)));
+			xxs.forEach(xs -> accum.addAll(IterMaker.newCollection(xs)));
 			return accum ;
 		}
 
@@ -56,7 +56,7 @@ extends Function<Stream<? extends Iterable<X>>, C>, Collector<Iterable<X>, C, C>
 
 		@Override
 		public BiConsumer<C, Iterable<X>> accumulator() {
-			return (xs,xxs) -> xs.addAll(CollectConvert.newCollection(xxs)) ;
+			return (xs,xxs) -> xs.addAll(IterMaker.newCollection(xxs)) ;
 		}
 
 		@Override
@@ -85,7 +85,7 @@ extends Function<Stream<? extends Iterable<X>>, C>, Collector<Iterable<X>, C, C>
 
 		@Override
 		protected Set<Characteristics> extendedCharacteristics() {
-			return CollectConvert.newSet(
+			return IterMaker.newSet(
 				Characteristics.CONCURRENT,
 				Characteristics.UNORDERED
 			) ;
@@ -117,7 +117,7 @@ extends Function<Stream<? extends Iterable<X>>, C>, Collector<Iterable<X>, C, C>
 
 		@Override
 		protected Set<Characteristics> extendedCharacteristics() {
-			return CollectConvert.newSet(
+			return IterMaker.newSet(
 				Characteristics.CONCURRENT,
 				Characteristics.UNORDERED
 			) ;
