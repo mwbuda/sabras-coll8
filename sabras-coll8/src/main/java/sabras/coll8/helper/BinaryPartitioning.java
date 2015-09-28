@@ -5,6 +5,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * a partitioning that applys to the raw binary of a given input object
+ *
+ * @param <X>
+ */
 public interface BinaryPartitioning<X>
 extends Function<X,List<byte[]>>{
 	
