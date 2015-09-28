@@ -1,4 +1,4 @@
-package sabras.coll8.helper;
+package sabras.coll8.helper.string;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -6,6 +6,8 @@ import java.util.Spliterator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+
+import sabras.coll8.helper.IterMaker;
 
 
 public class StringJoin {

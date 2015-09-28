@@ -1,4 +1,4 @@
-package sabras.coll8.helper;
+package sabras.coll8.helper.string;
 
 import java.util.Formatter;
 import java.util.function.Function;

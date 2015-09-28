@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import org.junit.Test;
 
+import sabras.coll8.helper.string.RegexFormatter;
+
 public class RegexFormatterTest {
 
 	@Test
